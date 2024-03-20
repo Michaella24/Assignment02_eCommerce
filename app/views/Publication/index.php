@@ -111,75 +111,94 @@
                 border-radius: 5px;
             }
 
+            #comment{
+                list-style-type: none;
+                margin-top: 20px;
+                padding: 0px;
+            }
+            ul{
+                list-style-position: inside;
+                padding-left: 0;
+            }
+
+            #comment_header{
+                size: 50px;
+            }
+
         </style>
        
     </head>
         
     <body>
 
-        <div id = 'wrapper'>
+    <div id='wrapper'>
 
-            <div id = 'topBar'>
+        <div id='topBar'>
 
-                <h1>Publications.net</h1>
-                <nav>
-                    <div class = 'specialButtons'>
+            <h1>Publications.net</h1>
+            <nav>
+                <div class='specialButtons'>
                     <?php 
-
-                if(isset($_SESSION['user_id'])) {
-                    echo '<a href="/Publication/create" class="create">Post</a>';
-                    echo '<a href="/Publication/home" class="create">Home</a>';
-                }
-                ?>
-
-                        <a href="/User/register" class="register">Register</a>
-                        <a href="/User/login" class="login">Log In</a>
-                    </div>
-                    
-                </nav>
-                    
-            </div>
-
-            <div id = 'publication'>
-            <div id = 'leading' style ="margin-bottom: 15px;">
-
-                <i class="bi bi-journal-text" style="font-size: 130px;"></i>
-
-                    <div id = 'leadingText' style='margin-left: 15px'>
-                        <h1><?= $data->publication_title ?></h1>
-                        <h5><?= $data->timestamp ?></h5> <!-- UPDATE TIMESTAMP LENGTH -->
-                        <h5><?= $data->profile_id ?></h5>
-                    </div>
-                    
-                </div>
-
-                <div id = 'content' style = 'margin-bottom: 15'>
-
-                    <p style="margin:5px; padding: 5px;"><?= $data->publication_text ?></p>
-
-                </div>
-
-                <form method = 'post' action =''>
-                    <div id = 'comments'>
-                    <h5>Comments</h5>
-                    <textarea id="content" name="comment" placeholder="Write comment..." style="width:750px; height: 200px; vertical-align: top; line-height: normal; resize: none;"></textarea>
-                    <br>
-                    <?php 
-                        if(isset($_SESSION['user_id'])) {
-                        echo '<input type="submit" name="action" value="Post" class="post_button">';
-                        }
+                    if(isset($_SESSION['user_id'])) {
+                        echo '<a href="/Publication/create" class="create">Post</a>';
+                        echo '<a href="/Publication/home" class="create">Home</a>';
+                    }
                     ?>
+                    <a href="/User/register" class="register">Register</a>
+                    <a href="/User/login" class="login">Log In</a>
+                </div>
 
-                    </div>
-
-                </form>
-
-            </div>
-
-            
-            
+            </nav>
 
         </div>
 
-    </body>
+        <div id='publication'>
+            <div id='leading' style="margin-bottom: 15px;">
+
+                <i class="bi bi-journal-text" style="font-size: 130px;"></i>
+
+                <div id='leadingText' style='margin-left: 15px'>
+                    <h1 style='font-size: 30px;'><?= $data['publication']->publication_title ?></h1>
+                    <h5 style='font-size: 20px; font-weight: 200;'><?= $data['publication']->timestamp ?></h5>
+                    <h5 style='font-size: 20px; font-weight: 200;'><?= $data['publication']->profile_id ?></h5>
+                </div>
+
+            </div>
+
+            <div id='content' style='margin-bottom: 15'>
+
+                <p style="margin:5px; padding: 5px;"><?= $data['publication']->publication_text ?></p>
+
+            </div>
+
+            <form method='post' action=''>
+
+                <div id='comments'>
+                    <h5 style='font-size: 30px; font-weight:300;'>Comments</h5>
+
+                    <?php 
+                    if(isset($_SESSION['user_id'])) { ?>
+                    <textarea id="content" name="comment" placeholder="Write comment..." style="width:750px; height: 200px; vertical-align: top; line-height: normal; resize: none;"></textarea>
+                    <br>
+
+                        <input type="submit" name="action" value="Post" class="post_button">
+                        <?php
+                    }
+                    ?>
+                    <ul>
+                    <?php foreach ($data['commentHeaders'] as $commentHeader): ?>
+                        <h5 id = 'comment' ><?= $commentHeader ?></h5>
+                    <?php endforeach; ?>
+
+                    </ul>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
 </html>

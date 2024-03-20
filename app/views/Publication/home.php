@@ -36,7 +36,7 @@
             }
 
 
-            .register {
+            .register, .logout {
                 margin-top: 10px;
                 display: inline-block;
                 padding: 10px 20px;
@@ -60,9 +60,10 @@
                 text-decoration: none;
                 border: none;
                 border-radius: 5px;
+                margin-left: 5px;
             }
 
-            .create{
+            .buttons{
                 margin-top: 10px;
                 display: inline-block;
                 padding: 10px 20px;
@@ -73,6 +74,7 @@
                 text-decoration: none;
                 border: none;
                 border-radius: 5px;
+                margin-right: 10px;
             }
 
             li{
@@ -104,12 +106,6 @@
                 width: 100%;/* Align items to the start and end of the container */
 
             }
-
-
-            .create{
-                margin-right: 10px;
-            }
-
             h3{
                 font-weight: 200;
                 font-size: 35;
@@ -131,13 +127,19 @@
                 <?php 
 
             if(isset($_SESSION['user_id'])) {
-                echo '<a href="/Publication/create" class="create">Post</a>';
-                echo '<a href="/Publication/home" class="create">Home</a>';
+                echo '<a href="/Profile/creation" class="buttons">Profile</a>';
+                echo '<a href="/Publication/home" class="buttons">Home</a>';
+                echo '<a href="/Publication/create" class="buttons">Post</a>';
+                echo '<a href="/Publication/logout" class="logout">Log out</a>';
             }
             ?>
 
-                    <a href="/User/register" class="register">Register</a>
-                    <a href="/User/login" class="login">Log In</a>
+            <?php
+                if(!isset($_SESSION['user_id'])) {
+                    echo '<a href="/User/register" class="register">Register</a>';
+                    echo '<a href="/User/login" class="login">Log In</a>';
+                }
+            ?>
                 
             </nav>
                 
@@ -156,10 +158,6 @@
             </div>
 
         </div>
-
-            
-                
-        
 
     </body>
 </html>
