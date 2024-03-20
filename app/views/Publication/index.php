@@ -133,24 +133,7 @@
 
     <div id='wrapper'>
 
-        <div id='topBar'>
-
-            <h1>Publications.net</h1>
-            <nav>
-                <div class='specialButtons'>
-                    <?php 
-                    if(isset($_SESSION['user_id'])) {
-                        echo '<a href="/Publication/create" class="create">Post</a>';
-                        echo '<a href="/Publication/home" class="create">Home</a>';
-                    }
-                    ?>
-                    <a href="/User/register" class="register">Register</a>
-                    <a href="/User/login" class="login">Log In</a>
-                </div>
-
-            </nav>
-
-        </div>
+        <?php include 'app\views\Publication\topBar.php'; ?>
 
         <div id='publication'>
             <div id='leading' style="margin-bottom: 15px;">
@@ -176,15 +159,17 @@
                 <div id='comments'>
                     <h5 style='font-size: 30px; font-weight:300;'>Comments</h5>
 
-                    <?php 
-                    if(isset($_SESSION['user_id'])) { ?>
-                    <textarea id="content" name="comment" placeholder="Write comment..." style="width:750px; height: 200px; vertical-align: top; line-height: normal; resize: none;"></textarea>
-                    <br>
+                    <?php if(isset($_SESSION['user_id'])) {
+    $profile = new \app\models\Profile();
+    $profileData = $profile->getUser($_SESSION['user_id']); // Assuming this method returns user profile data
 
-                        <input type="submit" name="action" value="Post" class="post_button">
-                        <?php
-                    }
-                    ?>
+    if($profileData) { ?>
+        <textarea id="content" name="comment" placeholder="Write comment..." style="width:750px; height: 200px; vertical-align: top; line-height: normal; resize: none;"></textarea>
+        <br>
+        <input type="submit" name="action" value="Post" class="post_button">
+<?php }
+} ?>
+
                     <ul>
                     <?php foreach ($data['commentHeaders'] as $commentHeader): ?>
                         <h5 id = 'comment' ><?= $commentHeader ?></h5>

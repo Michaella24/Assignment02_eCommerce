@@ -37,3 +37,10 @@ I can't believe i'm done with this part I will cry (happy tears ofc)
 -Posting comments work, i have to fix how they load (shouldnt be too difficult)
 -Limiting the user experience if they are not logged in
 -Began styling
+
+# Final Stages
+-Added constraints everywhere
+
+-Comments load properly
+
+-Only showing certain things if user has a profile

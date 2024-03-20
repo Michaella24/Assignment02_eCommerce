@@ -120,19 +120,45 @@
     <body>
         <div id = 'wrapper'>
 
-        <?php include 'app\views\Publication\topBar.php'; ?>
+        <div id = 'topBar'>
 
-        <h4>Welcome</h4>
+            <h1>Publications.net</h1>
+            <nav>
 
-            <div id = 'links' >
-                <h3>Publications</h3>
+            <?php 
+                if(isset($_SESSION['user_id'])) {
+                    // Check if the user has a profile
+                $profile = new \app\models\Profile();
+                $profileData = $profile->getUser($_SESSION['user_id']); // Assuming this method returns user profile data
+
+                    if ($profileData) {
+                        echo '<a href="/Profile/home" class="buttons">Profile</a>';
+                    }else{
+                        echo '<a href="/Profile/creation" class="buttons">Profile</a>';
+                    }
+                echo '<a href="/Publication/home" class="buttons">Home</a>';
+    
                 
-                <ul>
-                    <?php foreach ($data['publications'] as $link): ?>
-                        <li><?= $link ?></li>
-                        <?php endforeach; ?>
-                </ul>
-            </div>
+    
+                if ($profileData) { // If user has a profile, show the "Post" button
+                    echo '<a href="/Publication/create" class="buttons">Post</a>';
+                }
+    
+                echo '<a href="/Publication/logout" class="logout">Log out</a>';
+            }
+            ?>
+
+
+            <?php
+                if(!isset($_SESSION['user_id'])) {
+                    echo '<a href="/User/register" class="register">Register</a>';
+                    echo '<a href="/User/login" class="login">Log In</a>';
+                }
+            ?>
+                
+            </nav>
+                
+        </div>
 
         </div>
 
