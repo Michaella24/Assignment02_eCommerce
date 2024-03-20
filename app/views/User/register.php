@@ -2,6 +2,7 @@
     
 <head>
     <title>User registration</title>
+    <!-- todo: the css -->
 </head>
 
 <body>

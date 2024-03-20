@@ -12,6 +12,6 @@
     </head>
 
     <body>
-
+     <a href="/User/logout">Logout</a>   <!-- that was to test the log out function but it should be changed to a button maybe ? -->
     </body>
 </html>

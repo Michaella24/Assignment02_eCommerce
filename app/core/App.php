@@ -43,10 +43,30 @@ function __construct() {
 
     $controllerInstance = new $controller();
 
-    // if($this->filtered($conntrollerInstance, $method)) {
-    //     return;
-    // } //to study
+    if($this->filtered($controllerInstance, $method)) {
+        return;
+    } //to study
 
     call_user_func_array([$controllerInstance, $method], $namedParameters);
+}
+
+function filtered($controllerInstance, $method) { //to revise !!
+            //create an object that can get information about the controller
+            $reflection = new \ReflectionClass($controllerInstance);
+            //get the attributes from the controller
+            $classAttributes = $reflection->getAttributes();
+            $methodAttributes = $reflection->getMethod($method)->getAttributes();
+    
+            $attributes = array_merge($classAttributes,$methodAttributes);
+    
+            foreach ($attributes as $attribute) {
+                //instantiate the filter
+                $filter = $attribute->newInstance();
+                //run the filter and test if redirected
+                if($filter->redirected()){
+                    return true;
+                }
+            }
+            return false;
 }
 }
