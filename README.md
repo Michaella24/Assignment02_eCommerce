@@ -30,3 +30,10 @@ A user with a profile as well as a simple user(person) can read and search comme
 -Profile model with the CRUD is done.
 -User model with the CRUD is done.
 I can't believe i'm done with this part I will cry (happy tears ofc)
+
+# Seventh Push
+-Publications load properly
+-Posting publications works
+-Posting comments work, i have to fix how they load (shouldnt be too difficult)
+-Limiting the user experience if they are not logged in
+-Began styling

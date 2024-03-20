@@ -12,7 +12,6 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                /* height: 100vh; */
             }
             #leading{
                 display: flex;
@@ -26,10 +25,10 @@
 
             #links {
                 color: #fff;
-                background-color: #333; /* Set background color to white */
-                border-radius: 10px; /* Set border radius to create rounded corners */
+                background-color: #333; 
+                border-radius: 10px; 
                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add drop shadow */
-                padding: 20px; /* Optional: Add padding for visual spacing */
+                padding: 20px;
                 width: 500px;
                 margin-top: 25px;
                 
@@ -94,8 +93,8 @@
             }
 
             #topBar{
-                background-color: #333; /* Set background color */
-                color: #fff; /* Set text color */
+                background-color: #333; 
+                color: #fff; 
                 padding: 10px; /* Add padding for spacing */
                 display: flex; /* Use flexbox for layout */
                 justify-content: space-between; /* Align items to the start and end of the container */
@@ -108,7 +107,7 @@
 
 
             .create{
-                
+                margin-right: 10px;
             }
 
             h3{
@@ -129,12 +128,16 @@
 
             <h1>Publications.net</h1>
             <nav>
-                <div class = 'specialButtons'>
-                    <a href="/Publication/create" class="create">Post</a>
+                <?php 
+
+            if(isset($_SESSION['user_id'])) {
+                echo '<a href="/Publication/create" class="create">Post</a>';
+                echo '<a href="/Publication/home" class="create">Home</a>';
+            }
+            ?>
 
                     <a href="/User/register" class="register">Register</a>
                     <a href="/User/login" class="login">Log In</a>
-                </div>
                 
             </nav>
                 
