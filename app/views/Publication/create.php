@@ -26,7 +26,7 @@
     <body>
 
         <div id = 'wrapper'>
-        <?php include 'app\views\Publication\topBar.php'; ?>
+        <?php include 'app/views/Publication/topBar.php'; ?>
 
             <form method='post' action=''>
                 <div id = 'leading' style ="margin-bottom: 15px">

@@ -133,7 +133,7 @@
 
     <div id='wrapper'>
 
-        <?php include 'app\views\Publication\topBar.php'; ?>
+        <?php include 'app/views/Publication/topBar.php'; ?>
 
         <div id='publication'>
             <div id='leading' style="margin-bottom: 15px;">

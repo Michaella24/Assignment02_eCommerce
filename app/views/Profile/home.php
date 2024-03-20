@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class='container'>
-	<?php include 'app\views\Publication\topBar.php'; ?>
+	<?php include 'app/views/Publication/topBar.php'; ?>
 		<h1>User profile</h1>
 		<dl>
 		<dt>First name:</dt>

@@ -6,6 +6,7 @@
 </head>
 <body>
 	<div class='container'>
+	<?php include 'app/views/Publication/topBar.php'; ?>
 		<form method='post' action=''>
 			<div class="form-group">
 				<label>First name:<input type="text" class="form-control" name="first_name"  value='<?= $data->first_name ?>' /></label>

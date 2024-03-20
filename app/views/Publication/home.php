@@ -120,8 +120,7 @@
     <body>
         <div id = 'wrapper'>
 
-        <?php include 'app\views\Publication\topBar.php'; ?>
-
+        <?php include 'app/views/Publication/topBar.php'; ?>
         <h4>Welcome</h4>
 
             <div id = 'links' >

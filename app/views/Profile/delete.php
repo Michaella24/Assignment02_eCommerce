@@ -6,6 +6,7 @@
 </head>
 <body>
 	<div class='container'>
+	<?php include 'app/views/Publication/topBar.php'; ?>
 		<h1>User profile</h1>
 		<p>Do you want to proceed with deletion of your profile?</p>
 		<dl>
