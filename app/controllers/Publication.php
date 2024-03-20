@@ -4,7 +4,6 @@ namespace app\controllers;
 //#[\app\filters\Login]
 class Publication extends \app\core\Controller {
 
-
     function index($id1){
         $publication = new \app\models\Publication();
 
@@ -40,5 +39,4 @@ class Publication extends \app\core\Controller {
 
         $this->view('Publication/home',['publications' => $publications]);
     }
-
 }
