@@ -11,6 +11,9 @@ class Publication extends \app\core\Model {
     public $timestamp;
     public $publication_status;
 
+    // publication_comment
+    public $text;
+
     function insert(){
         $SQL = 'INSERT INTO publication(profile_id,publication_title,publication_text,timestamp,publication_status) VALUES (:profile_id,:publication_title,:publication_text,NOW(),:publication_status)';
         
@@ -25,7 +28,7 @@ class Publication extends \app\core\Model {
         );
     }
 
-    public function get($id){
+    public function get($id) {
         $SQL = 'SELECT * FROM publication WHERE publication_id = :publication_id';
         $STMT = self::$_conn->prepare($SQL);
 
@@ -37,8 +40,8 @@ class Publication extends \app\core\Model {
 
         $STMT->setFetchMode(PDO::FETCH_CLASS,'app\models\Publication');
         return $STMT->fetch();
-
     }
+        
 
     public function getAll(){
         $publicationIds = []; // Where all the links will be stored
@@ -58,12 +61,29 @@ class Publication extends \app\core\Model {
             $username = $row['username'];
         
             // Concatenate the username to the anchor text
-            $link = "<a href='/Publication/index/$publicationId'> <h5>$publicationTitle</h5> by $username</a>";
+            $link = "<a href='/Publication/index/$publicationId'><h5>$publicationTitle</h5>by $username</a>";
+
             $publicationIds[] = $link;
         }
 
         return $publicationIds;
 
     }
+
+    public function uploadComment($publicationId){
+        $SQL = 'INSERT INTO publication_comment(profile_id,publication_id,timestamp,text) VALUES (:profile_id,:publication_id,NOW(),:text)';
+
+        $STMT = self::$_conn->prepare($SQL);
+
+        $STMT->execute(
+            [
+                'profile_id'=>$this->profile_id,
+                'publication_id'=>$publicationId,
+                'text'=>$this->text,
+            ]
+            );
+    }
+
+
 
 }

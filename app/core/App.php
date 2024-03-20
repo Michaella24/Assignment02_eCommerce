@@ -77,10 +77,11 @@ class App{
         $controller = '\app\controllers\\' . $controller;
         $controllerInstance = new $controller();
 
-    // if($this->filtered($conntrollerInstance, $method)) {
-    //     return;
-    // } //to study
+        if($this->filtered($controllerInstance, $method)){
+            return;
+        }
 
-    call_user_func_array([$controllerInstance, $method], $namedParameters);
-}
+        call_user_func_array([$controllerInstance, $method], $namedParams);
+
+    }
 }

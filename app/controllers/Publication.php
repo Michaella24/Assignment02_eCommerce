@@ -10,6 +10,17 @@ class Publication extends \app\core\Controller {
         $publication = $publication->get($id1);
 
         $this->view('Publication/index',$publication);
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $publicationComment = new \app\models\Publication();
+
+            $publicationComment->profile_id = 1;
+            $publicationComment->publication_id = $id1;
+            $publicationComment->text = $_POST['comment'];
+
+            $publicationComment->uploadComment($id1);
+
+        }
     }
 
     function create(){
@@ -24,7 +35,7 @@ class Publication extends \app\core\Controller {
 
             $publication->insert();
 
-            header('location:/Publication/index');
+            header('location:/Publication/home');
 
         }else{
             $this->view('Publication/create');

@@ -48,9 +48,15 @@
 
             </div>
 
-            <div id = 'comments'>
+            <form method = 'post' action =''>
+                <div id = 'comments'>
                 <h5>Comments</h5>
-            </div>
+                <textarea id="content" name="comment" placeholder="Write comment..." style="width:750px; height: 200px; vertical-align: top; line-height: normal; resize: none;"></textarea>
+                <input type="submit" name='action' value='Post'>
+                </div>
+
+            </form>
+            
 
         </div>
 

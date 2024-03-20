@@ -7,31 +7,155 @@
 
         <style>
             #wrapper{
-                padding: 20px;
+                padding-top: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                /* height: 100vh; */
             }
             #leading{
                 display: flex;
                 align-items: center;
             }
 
-            #title{
-                margin-left: 15px;
-                width: 550px;
+            h1{
+                font-weight: 200;
+                font-size: 25;
             }
+
+            #links {
+                color: #fff;
+                background-color: #333; /* Set background color to white */
+                border-radius: 10px; /* Set border radius to create rounded corners */
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add drop shadow */
+                padding: 20px; /* Optional: Add padding for visual spacing */
+                width: 500px;
+                margin-top: 25px;
+                
+                text-align: center;
+            }
+
+
+            .register {
+                margin-top: 10px;
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                font-size: 15;
+                font-weight: 300;
+                color: #fff;
+                text-decoration: none;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .login {
+                margin-top: 10px;
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #fff;
+                font-size: 15;
+                font-weight: 300;
+                color: #007bff;
+                text-decoration: none;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .create{
+                margin-top: 10px;
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #fff;
+                font-size: 15;
+                font-weight: 300;
+                color: #333;
+                text-decoration: none;
+                border: none;
+                border-radius: 5px;
+            }
+
+            li{
+                list-style-type: none;
+                margin-top: 20px;
+                padding: 0px;
+                
+            }
+            ul{
+                list-style-position: inside;
+                padding-left: 0;
+            }
+
+            h4{
+                margin-top: 75px;
+                font-size: 70px;
+                font-weight: 300;
+            }
+
+            #topBar{
+                background-color: #333; /* Set background color */
+                color: #fff; /* Set text color */
+                padding: 10px; /* Add padding for spacing */
+                display: flex; /* Use flexbox for layout */
+                justify-content: space-between; /* Align items to the start and end of the container */
+                align-items: center; /* Center items vertically */
+                position: fixed; /* Position the top bar fixed */
+                top: 0; /* Align the top bar to the top of the viewport */
+                width: 100%;/* Align items to the start and end of the container */
+
+            }
+
+
+            .create{
+                
+            }
+
+            h3{
+                font-weight: 200;
+                font-size: 35;
+            }
+            
+
 
         </style>
        
     </head>
         
     <body>
+        <div id = 'wrapper'>
+
+        <div id = 'topBar'>
+
+            <h1>Publications.net</h1>
+            <nav>
+                <div class = 'specialButtons'>
+                    <a href="/Publication/create" class="create">Post</a>
+
+                    <a href="/User/register" class="register">Register</a>
+                    <a href="/User/login" class="login">Log In</a>
+                </div>
+                
+            </nav>
+                
+        </div>
+
+        <h4>Welcome</h4>
 
             <div id = 'links' >
+                <h3>Publications</h3>
+                
                 <ul>
                     <?php foreach ($data['publications'] as $link): ?>
                         <li><?= $link ?></li>
                         <?php endforeach; ?>
                 </ul>
             </div>
+
+        </div>
+
+            
+                
         
 
     </body>

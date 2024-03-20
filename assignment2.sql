@@ -47,7 +47,7 @@ CREATE TABLE `publication` (
   `profile_id` int(11) NOT NULL,
   `publication_title` varchar(50) NOT NULL,
   `publication_text` varchar(250) NOT NULL,
-  `timestamp` varchar(15) NOT NULL,
+  `timestamp` varchar(20) NOT NULL,
   `publication_status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -73,7 +73,7 @@ CREATE TABLE `publication_comment` (
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `username` varchar(25) NOT NULL,
-  `password_hash` varchar(20) NOT NULL
+  `password_hash` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
