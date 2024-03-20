@@ -8,7 +8,7 @@ class Profile extends \app\core\Model{
     public $profile_id; //pk
     public $user_id; //fk
     public $first_name;
-    public $middle_name;
+    public $middle_name = '';
     public $last_name;
 
     //CRUD
@@ -31,10 +31,11 @@ class Profile extends \app\core\Model{
 
     //update
     public function update() {
-    $SQL = 'UPDATE profile SET first_name=:first_name, middle_name:middle_name, last_name =:last_name WHERE profile_id=:profile_id';
+    $SQL = 'UPDATE profile SET first_name=:first_name, middle_name=:middle_name, last_name =:last_name WHERE profile_id=:profile_id';
     //prepare statement
     $STATEMENT = self::$_conn->prepare($SQL);
     $data = [
+        'profile_id' => $this->profile_id,
         'first_name' => $this->first_name,
         'middle_name' => $this->middle_name,
         'last_name' => $this->last_name,
@@ -60,10 +61,12 @@ class Profile extends \app\core\Model{
 
     public function delete() {
         //sql statement
-        $SQL = 'DELETE * FROM profile WHERE profile_id=:profile_id';
+        $SQL = 'DELETE FROM profile WHERE profile_id = :profile_id';
         //prepare statement
         $STATEMENT = self::$_conn->prepare($SQL);
         //execute the statement by also providing the profile id
         $STATEMENT->execute(['profile_id' => $this->profile_id]);
+
+        header('location:/Profile/creation');
     }
 }

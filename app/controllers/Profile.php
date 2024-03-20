@@ -41,11 +41,11 @@ class Profile extends \app\core\Controller {
         //get the profile of the user
         $profile = $profile->getUser($_SESSION['user_id']);
         //check if user submitted the information
-        if ($_SERVER['REQUEST_METHOD' === 'POST']) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //modify the profile information
         $profile->first_name = $_POST['first_name'];
-        $profile->first_name = $_POST['middle_name'];
-        $profile->first_name = $_POST['last_name'];
+        $profile->middle_name = $_POST['middle_name'];
+        $profile->last_name = $_POST['last_name'];
         //call the update function from the profile object
         $profile->update();
         //redirect the user to the profile home page
@@ -62,9 +62,24 @@ class Profile extends \app\core\Controller {
         $profile = new \app\models\Profile();
         //get the profile of the user   
         $profile = $profile->getUser($_SESSION['user_id']);
+        //check if the user has submit the delete
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $profile->delete();
+            header('location:/Profile/creation');
+        }
+        else {
+            $this->view('Profile/delete',$profile);
+        }
         //call the delete method
-        $profile->delete();
+        
         //redirect the user to the publication page or Profile creation ?
-        header('location:/Profile/delete');
+        
+
+        // if($_SERVER['REQUEST_METHOD'] === 'POST'){
+		// 	$profile->delete();
+		// 	header('location:/Profile/index');
+		// }else{
+		// 	$this->view('Profile/delete',$profile);
+		// }
     }
 }

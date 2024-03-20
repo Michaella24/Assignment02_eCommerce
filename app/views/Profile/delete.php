@@ -18,7 +18,7 @@
 		</dl>
 		<form method="post" action=''>
 			<input type="submit" name="action" value="Delete">
-			<a href='/Profile/creation'>Cancel</a>
+			<a href='/Profile/home'>Cancel</a>
 		</form>
 	</div>
 </body>
