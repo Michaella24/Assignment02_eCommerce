@@ -84,6 +84,33 @@ class Publication extends \app\core\Model {
             );
     }
 
+    public function getComments($publicationId) {
+        $commentHeaders = []; // Initialize an empty array to store comment headers
+    
+        $SQL = 'SELECT profile_id, timestamp, text FROM publication_comment WHERE publication_id = :publication_id';
+    
+        $STMT = self::$_conn->prepare($SQL);
+    
+        $STMT->execute([
+            'publication_id' => $publicationId
+        ]);
+    
+        while ($row = $STMT->fetch(PDO::FETCH_ASSOC)) {
+            $profile_id = $row['profile_id'];
+            $timestamp = $row['timestamp'];
+            $text = $row['text'];
+    
+            // Construct comment header string and append it to the array
+            $commentHeader = "<h5 style='font-size: 20px; font-weight: 400;'>Comment by $profile_id at $timestamp</h5>$text";
+            $commentHeaders[] = $commentHeader;
+        }
+    
+        return $commentHeaders; // Return the array of comment headers
+    }
+    
+    
+    
+
 
 
 }
