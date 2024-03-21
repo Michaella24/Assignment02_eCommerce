@@ -107,6 +107,52 @@ class Publication extends \app\core\Model {
     
         return $commentHeaders; // Return the array of comment headers
     }
+
+    //search method
+
+    public function search($userSearch, $userSearchType) {
+        $searchArray = [];
+        if ($userSearchType === 'Search by Title') {
+
+            $SQL = 'SELECT p.publication_id, p.publication_title, u.username 
+            FROM publication p
+            JOIN profile pr ON p.profile_id = pr.profile_id
+            JOIN user u ON pr.user_id = u.user_id
+            WHERE publication_title =:publication_title';
+            
+        $STATEMENT = self::$_conn->prepare($SQL);
+        
+        $STATEMENT->execute([
+            'publication_title' => $userSearch
+        ]);
+        }
+        else if  ($userSearchType === 'Search by Content'){
+            $SQL = 'SELECT p.publication_id, p.publication_title, u.username 
+            FROM publication p
+            JOIN profile pr ON p.profile_id = pr.profile_id
+            JOIN user u ON pr.user_id = u.user_id
+            WHERE publication_text =:publication_text';
+        
+        $STATEMENT = self::$_conn->prepare($SQL);
+        
+        $STATEMENT->execute([
+            'publication_text' => $userSearch
+        ]);
+        }
+        
+       
+                while($row = $STATEMENT->fetch(PDO::FETCH_ASSOC)) {
+                    $publication_id = $row['publication_id'];
+                    $publication_title = $row['publication_title'];
+                    $username = $row['username'];
+                    $link = "<a href='/Publication/index/$publication_id'><h5>$publication_title</h5>by $username</a>";
+
+                    $searchArray[] = $link;
+                }
+                return $searchArray;
+
+
+    }
     
     
     

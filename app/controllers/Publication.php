@@ -72,4 +72,22 @@ class Publication extends \app\core\Controller {
         header("Location:/Publication/home");
         exit();
     }
+
+    //search bar
+
+    public function search() {
+        $searchResults = [];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if(!empty($_POST['search'])) {
+                $userSearch = $_POST['search'];
+                $searchType = $_POST['searchType'];
+                $publication = new \app\models\Publication();
+                $searchResults = $publication->search($userSearch,$searchType);
+                $this->view('Publication/search', ['results' => $searchResults]);
+            }
+            else {
+                $this->view('Publication/search', ['results' => null]);
+            }
+        }
+    }
 }
