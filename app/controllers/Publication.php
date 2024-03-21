@@ -132,5 +132,5 @@ class Publication extends \app\core\Controller {
             }
         }
     }
->>>>>>> 7525dfd4ebfbafa2b9d9dd721f54c1b884274e81
+
 }

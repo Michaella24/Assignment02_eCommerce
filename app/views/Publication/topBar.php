@@ -183,13 +183,7 @@
             ?>
 
        
-                  <div id="searchFormContainer">
-                    <form id="searchForm" method="POST" action='/Publication/search'>
-                        <input type="text" name="search" placeholder="Search...">
-                        <input type="submit" name="searchType" value ="Search by Title"/>
-                        <input type="submit" name="searchType" value ="Search by Content"/>
-                    </form>
-                </div>
+                  
             </nav>
 
         </div>

@@ -123,6 +123,14 @@
         <?php include 'app/views/Publication/topBar.php'; ?>
         <h4>Welcome</h4>
 
+        <div id="searchFormContainer">
+                    <form id="searchForm" method="POST" action='/Publication/search'>
+                        <input type="text" name="search" placeholder="Search...">
+                        <input type="submit" name="searchType" value ="Search by Title"/>
+                        <input type="submit" name="searchType" value ="Search by Content"/>
+                    </form>
+                </div>
+
             <div id = 'links' >
                 <h3>Publications</h3>
                 
