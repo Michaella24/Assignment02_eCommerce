@@ -72,17 +72,17 @@ a:hover {
 
                     <i class="bi bi-plus-square-fill" style="font-size: 130px;"></i>
 
-                    <input style = "margin-left: 10px;" type="text" id="title" name="title" placeholder="Title" style="font-size: 25;">
+                    <input style ="margin-left: 10px;" type="text" id="title" name="title" placeholder="New Title" style="font-size: 25;">
         
                 </div>
 
                 <div id = 'content' style = 'margin-bottom: 15'>
 
-                    <textarea id="content" name="content" placeholder="Publication content" style="width:750px; height: 400px; vertical-align: top; line-height: normal; resize: none;"></textarea>
+                    <textarea id="content" name="content" placeholder="New Content" style="width:750px; height: 400px; vertical-align: top; line-height: normal; resize: none;"></textarea>
 
                 </div>
 
-                <input type="submit" name="action" value ="Publish" />
+                <input type="submit" name="action" value ="Update" />
 
             </form>
 

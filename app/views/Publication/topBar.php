@@ -23,18 +23,6 @@
                 font-size: 25;
             }
 
-            #links {
-                color: #fff;
-                background-color: #333; 
-                border-radius: 10px; 
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add drop shadow */
-                padding: 20px;
-                width: 500px;
-                margin-top: 25px;
-                
-                text-align: center;
-            }
-
 
             .register, .logout {
                 margin-top: 10px;
@@ -47,6 +35,7 @@
                 text-decoration: none;
                 border: none;
                 border-radius: 5px;
+                cursor: pointer;
             }
 
             .login {
@@ -61,6 +50,7 @@
                 border: none;
                 border-radius: 5px;
                 margin-left: 5px;
+                cursor: pointer;
             }
 
             .buttons{
@@ -75,6 +65,7 @@
                 border: none;
                 border-radius: 5px;
                 margin-right: 10px;
+                cursor: pointer;
             }
 
             li{
@@ -125,6 +116,8 @@
             <h1>Publications.net</h1>
             <nav>
 
+            <a href="/Publication/home" class="buttons">Home</a>
+
             <?php 
                 if(isset($_SESSION['user_id'])) {
                     // Check if the user has a profile
@@ -136,7 +129,7 @@
                     }else{
                         echo '<a href="/Profile/creation" class="buttons">Profile</a>';
                     }
-                echo '<a href="/Publication/home" class="buttons">Home</a>';
+                
     
                 
     
@@ -147,6 +140,8 @@
                 echo '<a href="/Publication/logout" class="logout">Log out</a>';
             }
             ?>
+
+            
 
 
             <?php

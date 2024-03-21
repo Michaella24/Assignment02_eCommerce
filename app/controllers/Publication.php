@@ -7,8 +7,10 @@ class Publication extends \app\core\Controller {
     function index($id1) {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $publicationComment = new \app\models\Publication();
+            $profile = new \app\models\Profile();
+            $profile = $profile->getUser($_SESSION['user_id']);
     
-            $publicationComment->profile_id = 1;
+            $publicationComment->profile_id = $profile->profile_id;
             $publicationComment->publication_id = $id1;
             $publicationComment->text = $_POST['comment'];
     
@@ -42,8 +44,11 @@ class Publication extends \app\core\Controller {
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             $publication = new \app\models\Publication();
+            $profile = new \app\models\Profile();
+            $profile = $profile->getUser($_SESSION['user_id']);
 
-            $publication->profile_id = 1;
+
+            $publication->profile_id = $profile->profile_id;
             $publication->publication_title = $_POST['title'];
             $publication->publication_text = $_POST['content'];
             $publication->publication_status = 1;
@@ -72,4 +77,42 @@ class Publication extends \app\core\Controller {
         header("Location:/Publication/home");
         exit();
     }
+
+    function updateComment($id1){
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $publication = new \app\models\Publication();
+            $publication->text = $_POST['text'];
+            $publication->updateComment($id1);
+
+            header("location:/Publication/home");
+        }else{
+            $this->view('Publication/updateComment');
+        }        
+    }
+
+    function update($id1){
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $publication = new \app\models\Publication();
+            $publication->publication_title = $_POST['title'];
+            $publication->publication_text = $_POST['content'];
+            $publication->update($id1);
+
+            header("location:/Publication/home");
+        }else{
+            $this->view('Publication/update');
+        }  
+    }
+
+    function status($id1){
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $publication = new \app\models\Publication();
+            $publication->status($id1);
+
+            header("location:/Publication/home");
+        }else{
+            $this->view('Publication/status');
+        }  
+    }
+
+    
 }

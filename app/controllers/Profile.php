@@ -6,14 +6,27 @@ class Profile extends \app\core\Controller {
 
     #[\app\filters\HasProfile]
     public function profilePage() {
-    //instantiate the profile object 
-    $profile = new \app\models\Profile();
-    //get the information of the profile
-    $profile = $profile->getUser($_SESSION['user_id']); //get the id from the current logged in user session
+        // Get the user profile
+        $userProfile = new \app\models\Profile();
+        $userProfile = $userProfile->getUser($_SESSION['user_id']);
+        
+        // Get the publications associated with the user profile
+        $publicationsModel = new \app\models\Publication();
+        $publications = $publicationsModel->getByProfile($userProfile->profile_id);
 
-    //send the data to the view and display it
-    $this->view('Profile/home',$profile);
+        $comments = $publicationsModel->getCommentByProfile($userProfile->profile_id);
+        
+        // Prepare the data to pass to the view
+        $data = [
+            'profile' => $userProfile,
+            'publications' => $publications,
+            'comments' => $comments,
+        ];
+        
+        // Pass data to the view
+        $this->view("Profile/home", $data);
     }
+    
 
     public function create() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {

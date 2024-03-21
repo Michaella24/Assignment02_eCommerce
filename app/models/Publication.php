@@ -28,8 +28,65 @@ class Publication extends \app\core\Model {
         );
     }
 
+    public function getByProfile($id){
+        $publicationIds = []; // Where all the links will be stored
+
+        $SQL = 'SELECT publication_id, publication_title
+        FROM publication
+        WHERE profile_id = :profile_id';
+
+        $STMT = self::$_conn->prepare($SQL);
+
+        $STMT->execute([
+            'profile_id'=>$id
+        ]);
+
+        while ($row = $STMT->fetch(PDO::FETCH_ASSOC)) {
+            $publicationId = $row['publication_id'];
+            $publicationTitle = $row['publication_title'];
+        
+            // Concatenate the username to the anchor text
+            $link = "<a href='/Publication/index/$publicationId'><h5>$publicationTitle</h5></a>";
+
+            $publicationIds[] = $link;
+        }
+
+        return $publicationIds;
+    }
+
+    function getCommentByProfile($id){
+        $comments = []; // Where all the links will be stored
+
+        $SQL = 'SELECT publication_id, text
+        FROM publication_comment
+        WHERE profile_id = :profile_id';
+
+        $STMT = self::$_conn->prepare($SQL);
+
+        $STMT->execute([
+            'profile_id'=>$id
+        ]);
+
+        while ($row = $STMT->fetch(PDO::FETCH_ASSOC)) {
+            $publicationId = $row['publication_id'];
+            $comment = $row['text'];
+        
+            // Concatenate the username to the anchor text
+            $link = "<a href='/Publication/index/$publicationId'><h5>$comment</h5></a>";
+
+            $comments[] = $link;
+        }
+
+        return $comments;
+    }
+
     public function get($id) {
-        $SQL = 'SELECT * FROM publication WHERE publication_id = :publication_id';
+        $SQL = 'SELECT p.publication_id, p.profile_id, p.publication_title, p.timestamp, u.username, p.publication_text 
+        FROM publication p
+        JOIN profile pr ON p.profile_id = pr.profile_id
+        JOIN user u ON pr.user_id = u.user_id
+        WHERE publication_id = :publication_id';
+
         $STMT = self::$_conn->prepare($SQL);
 
         $STMT->execute(
@@ -49,7 +106,8 @@ class Publication extends \app\core\Model {
         $SQL = 'SELECT p.publication_id, p.publication_title, u.username 
         FROM publication p
         JOIN profile pr ON p.profile_id = pr.profile_id
-        JOIN user u ON pr.user_id = u.user_id';
+        JOIN user u ON pr.user_id = u.user_id
+        WHERE p.publication_status = 1';
 
         $STMT = self::$_conn->prepare($SQL);
 
@@ -87,7 +145,11 @@ class Publication extends \app\core\Model {
     public function getComments($publicationId) {
         $commentHeaders = []; // Initialize an empty array to store comment headers
     
-        $SQL = 'SELECT profile_id, timestamp, text FROM publication_comment WHERE publication_id = :publication_id';
+        $SQL = 'SELECT p.publication_comment_id, p.profile_id, p.timestamp, p.text, u.username
+        FROM publication_comment p
+        JOIN profile pr ON p.profile_id = pr.profile_id
+        JOIN user u ON pr.user_id = u.user_id
+        WHERE publication_id = :publication_id';
     
         $STMT = self::$_conn->prepare($SQL);
     
@@ -96,21 +158,77 @@ class Publication extends \app\core\Model {
         ]);
     
         while ($row = $STMT->fetch(PDO::FETCH_ASSOC)) {
-            $profile_id = $row['profile_id'];
+            $id = $row['publication_comment_id'];
+            $username = $row['username'];
             $timestamp = $row['timestamp'];
             $text = $row['text'];
-    
-            // Construct comment header string and append it to the array
-            $commentHeader = "<h5 style='font-size: 20px; font-weight: 400;'>Comment by $profile_id at $timestamp</h5>$text";
+            $profile = $row['profile_id'];
+        
+            if(isset($_SESSION['user_id'])) {
+                $profileid = new \app\models\Profile();
+                $profileid = $profileid->getUser($_SESSION['user_id']);
+                
+                // Check if $profileid is not false before accessing its properties
+                if ($profileid) {
+                    if ($profileid->profile_id === $profile) {
+                        $commentHeader = "<h5 id='yourComment' style='font-size: 20px; font-weight: 400;'>$username | $timestamp<a id='editButton' href='/Publication/updateComment/$id'>Edit</a></h5>$text ";
+                    } else {
+                        $commentHeader = "<h5 style='font-size: 20px; font-weight: 400;'>$username | $timestamp</h5>$text";
+                    }
+                } else {
+                    // Handle the case where $profileid is false (user is not logged in)
+                    $commentHeader = "<h5 style='font-size: 20px; font-weight: 400;'>$username | $timestamp</h5>$text";
+                }
+            } else {
+                // Handle the case where $_SESSION['user_id'] is not set (user is not logged in)
+                $commentHeader = "<h5 style='font-size: 20px; font-weight: 400;'>$username | $timestamp</h5>$text";
+            }
+        
             $commentHeaders[] = $commentHeader;
         }
+        
     
         return $commentHeaders; // Return the array of comment headers
     }
-    
-    
-    
 
+    function updateComment($commentId){
+        $SQL = 'UPDATE publication_comment SET text=:text, timestamp=NOW() WHERE publication_comment_id=:PCI';
+        //prepare statement
+        $STATEMENT = self::$_conn->prepare($SQL);
+        $data = [
+            'text'=>$this->text,
+            'PCI'=>$commentId
+        ];
+        $STATEMENT->execute($data);
+    }
 
+    function update($id){
+        $SQL = 'UPDATE publication SET publication_title=:publication_title, publication_text=:publication_text, timestamp=NOW() WHERE publication_id=:PID';
+        //prepare statement
+        $STATEMENT = self::$_conn->prepare($SQL);
+        $data = [
+            'publication_title'=>$this->publication_title,
+            'publication_text'=>$this->publication_text,
+            'PID'=>$id
+        ];
+        $STATEMENT->execute($data);
+    }
+
+    function status($publicationId) {
+        $SQL = 'UPDATE publication
+                SET publication_status = CASE 
+                        WHEN publication_status = 1 THEN 0
+                        ELSE 1
+                    END
+                WHERE publication_id = :publication_id';
+    
+        $STMT = self::$_conn->prepare($SQL);
+    
+        $STMT->execute([
+            'publication_id' => $publicationId
+        ]);
+    }
+    
+    
 
 }

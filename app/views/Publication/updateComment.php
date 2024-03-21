@@ -1,11 +1,8 @@
 <html>
-    <head>
-        <title>Home</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
 
-        <style>
+<head>
+<title> User login </title>
+<style>
 
 body, html {
     height: 100%;
@@ -58,35 +55,31 @@ a:hover {
     text-decoration: underline; /* Add underline on hover */
 }
 </style>
-       
-    </head>
-        
-    <body>
 
-    <div class="centered-content">
-        <?php include 'app/views/Publication/topBar.php'; ?>
-        <div class='container'>
+</head>
 
-            <form method='post' action=''>
-                <div id = 'leading' style ="margin-bottom: 15px">
+<body>
 
-                    <i class="bi bi-plus-square-fill" style="font-size: 130px;"></i>
+<div class="centered-content">
+<?php include 'app/views/Publication/topBar.php'; ?>
+    <div class='container'>
+        <form method='post' action=''> 
+            <div class="form-group">
+                <label>New:<input type="text" class="form-control" name="text" placeholder="Text" /></label>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="action" value="Update" />
+                <br>
+                <a href='/User/register'>Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
 
-                    <input style = "margin-left: 10px;" type="text" id="title" name="title" placeholder="Title" style="font-size: 25;">
-        
-                </div>
 
-                <div id = 'content' style = 'margin-bottom: 15'>
 
-                    <textarea id="content" name="content" placeholder="Publication content" style="width:750px; height: 400px; vertical-align: top; line-height: normal; resize: none;"></textarea>
+</body>
 
-                </div>
 
-                <input type="submit" name="action" value ="Publish" />
 
-            </form>
-
-        </div>
-
-    </body>
 </html>

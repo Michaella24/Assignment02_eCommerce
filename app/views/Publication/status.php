@@ -1,4 +1,4 @@
-<html>
+ <html>
     <head>
         <title>Home</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -63,26 +63,13 @@ a:hover {
         
     <body>
 
-    <div class="centered-content">
+        <div class="centered-content">
         <?php include 'app/views/Publication/topBar.php'; ?>
         <div class='container'>
 
             <form method='post' action=''>
-                <div id = 'leading' style ="margin-bottom: 15px">
 
-                    <i class="bi bi-plus-square-fill" style="font-size: 130px;"></i>
-
-                    <input style = "margin-left: 10px;" type="text" id="title" name="title" placeholder="Title" style="font-size: 25;">
-        
-                </div>
-
-                <div id = 'content' style = 'margin-bottom: 15'>
-
-                    <textarea id="content" name="content" placeholder="Publication content" style="width:750px; height: 400px; vertical-align: top; line-height: normal; resize: none;"></textarea>
-
-                </div>
-
-                <input type="submit" name="action" value ="Publish" />
+                <input type="submit" name="action" value ="Activate/Deactivate" />
 
             </form>
 

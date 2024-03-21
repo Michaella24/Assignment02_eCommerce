@@ -10,5 +10,7 @@ $this->addRoute('Profile/home', 'Profile,profilePage');
 $this->addRoute('Profile/creation', 'Profile,create');
 $this->addRoute('Profile/modify', 'Profile,modify');
 $this->addRoute('Profile/delete', 'Profile,delete');
-$this->addRoute('Publication/test/{id1}', 'Publication,test');
 $this->addRoute('Publication/logout', 'Publication,logout');
+$this->addRoute('Publication/updateComment/{id1}', 'Publication,updateComment');
+$this->addRoute('Publication/update/{id1}', 'Publication,update');
+$this->addRoute('Publication/status/{id1}', 'Publication,status');

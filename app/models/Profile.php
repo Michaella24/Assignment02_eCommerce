@@ -45,6 +45,7 @@ class Profile extends \app\core\Model{
 
     //getUsers
 
+    
     public function getUser($user_id) {
         //sql statement
         $SQL = 'SELECT * FROM profile WHERE user_id = :user_id';
