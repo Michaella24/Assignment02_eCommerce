@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Home</title>
+        <title>Search Results</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
@@ -23,6 +23,18 @@
                 font-size: 25;
             }
 
+            #links {
+                color: #fff;
+                background-color: #333; 
+                border-radius: 10px; 
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add drop shadow */
+                padding: 20px;
+                width: 500px;
+                margin-top: 25px;
+                
+                text-align: center;
+            }
+
 
             .register, .logout {
                 margin-top: 10px;
@@ -35,7 +47,6 @@
                 text-decoration: none;
                 border: none;
                 border-radius: 5px;
-                cursor: pointer;
             }
 
             .login {
@@ -50,7 +61,6 @@
                 border: none;
                 border-radius: 5px;
                 margin-left: 5px;
-                cursor: pointer;
             }
 
             .buttons{
@@ -65,7 +75,6 @@
                 border: none;
                 border-radius: 5px;
                 margin-right: 10px;
-                cursor: pointer;
             }
 
             li{
@@ -101,38 +110,7 @@
                 font-weight: 200;
                 font-size: 35;
             }
-
-            #searchFormContainer {
-                flex: 1; 
-                display: flex;
-                justify-content: center;
-            }
-
-            #searchForm {
-                display: flex;
-                align-items: center;
-            }
-
-            #searchForm {
-                display: flex;
-                align-items: center;
-            }
-
-            #searchForm input[type="text"] {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 5px;
-        }
-
-            #searchForm button[type="submit"] {
-             padding: 8px 15px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+            
 
 
         </style>
@@ -142,57 +120,26 @@
     <body>
         <div id = 'wrapper'>
 
-        <div id = 'topBar'>
+        <?php include 'app/views/Publication/topBar.php'; ?>
+        <h4>Welcome</h4>
 
-            <h1>Publications.net</h1>
-            <nav>
-
-            <a href="/Publication/home" class="buttons">Home</a>
-
-            <?php 
-                if(isset($_SESSION['user_id'])) {
-                    // Check if the user has a profile
-                $profile = new \app\models\Profile();
-                $profileData = $profile->getUser($_SESSION['user_id']); // Assuming this method returns user profile data
-
-                    if ($profileData) {
-                        echo '<a href="/Profile/home" class="buttons">Profile</a>';
-                    }else{
-                        echo '<a href="/Profile/creation" class="buttons">Profile</a>';
+            <div id = 'links' >
+                <h3>Searched Publications</h3>
+                
+                <ul>
+                    <?php 
+                    if ($data['results'] == null) {
+                        echo 'No results found';
+                        exit(); //to avoid having errors if the user clicks the search bar multiple times
                     }
-                
-    
-                
-    
-                if ($profileData) { // If user has a profile, show the "Post" button
-                    echo '<a href="/Publication/create" class="buttons">Post</a>';
-                }
-    
-                echo '<a href="/Publication/logout" class="logout">Log out</a>';
-            }
-            ?>
-
-            
-
-
-            <?php
-                if(!isset($_SESSION['user_id'])) {
-                    echo '<a href="/User/register" class="register">Register</a>';
-                    echo '<a href="/User/login" class="login">Log In</a>';
-                }
-            ?>
-
-       
-                  <div id="searchFormContainer">
-                    <form id="searchForm" method="POST" action='/Publication/search'>
-                        <input type="text" name="search" placeholder="Search...">
-                        <input type="submit" name="searchType" value ="Search by Title"/>
-                        <input type="submit" name="searchType" value ="Search by Content"/>
-                    </form>
-                </div>
-            </nav>
-
-        </div>
+                    foreach ($data['results'] as $link): 
+                    
+                    ?>
+                        <li><?= $link ?></li>
+                        <?php endforeach; ?>
+                        
+                </ul>
+            </div>
 
         </div>
 

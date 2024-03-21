@@ -14,3 +14,6 @@ $this->addRoute('Publication/logout', 'Publication,logout');
 $this->addRoute('Publication/updateComment/{id1}', 'Publication,updateComment');
 $this->addRoute('Publication/update/{id1}', 'Publication,update');
 $this->addRoute('Publication/status/{id1}', 'Publication,status');
+$this->addRoute('Publication/test/{id1}', 'Publication,test');
+$this->addRoute('Publication/logout', 'Publication,logout');
+$this->addRoute('Publication/search', 'Publication,search');

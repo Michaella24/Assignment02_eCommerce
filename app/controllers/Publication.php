@@ -78,6 +78,7 @@ class Publication extends \app\core\Controller {
         exit();
     }
 
+
     function updateComment($id1){
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $publication = new \app\models\Publication();
@@ -114,5 +115,22 @@ class Publication extends \app\core\Controller {
         }  
     }
 
-    
+    //search bar
+
+    public function search() {
+        $searchResults = [];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if(!empty($_POST['search'])) {
+                $userSearch = $_POST['search'];
+                $searchType = $_POST['searchType'];
+                $publication = new \app\models\Publication();
+                $searchResults = $publication->search($userSearch,$searchType);
+                $this->view('Publication/search', ['results' => $searchResults]);
+            }
+            else {
+                $this->view('Publication/search', ['results' => null]);
+            }
+        }
+    }
+>>>>>>> 7525dfd4ebfbafa2b9d9dd721f54c1b884274e81
 }
