@@ -80,27 +80,35 @@ class Publication extends \app\core\Controller {
 
 
     function updateComment($id1){
+        $publication = new \app\models\Publication();
+        $publication = $publication->getComment($id1);
+
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $publication = new \app\models\Publication();
+            
             $publication->text = $_POST['text'];
             $publication->updateComment($id1);
 
-            header("location:/Publication/home");
+            header("location:/Publication/index/".$publication->publication_id);
         }else{
-            $this->view('Publication/updateComment');
+            $this->view('Publication/updateComment', $publication);
         }        
     }
 
     function update($id1){
+        $publication = new \app\models\Publication();
+        $publication = $publication->get($id1);
+
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $publication = new \app\models\Publication();
+            
             $publication->publication_title = $_POST['title'];
             $publication->publication_text = $_POST['content'];
             $publication->update($id1);
 
             header("location:/Publication/home");
         }else{
-            $this->view('Publication/update');
+            
+
+            $this->view('Publication/update',$publication);
         }  
     }
 

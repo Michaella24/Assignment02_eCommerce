@@ -63,20 +63,6 @@
                 margin-left: 5px;
             }
 
-            .buttons{
-                margin-top: 10px;
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: #fff;
-                font-size: 15;
-                font-weight: 300;
-                color: #333;
-                text-decoration: none;
-                border: none;
-                border-radius: 5px;
-                margin-right: 10px;
-            }
-
             li{
                 list-style-type: none;
                 margin-top: 20px;
@@ -110,6 +96,20 @@
                 font-weight: 200;
                 font-size: 35;
             }
+
+            .b{
+                margin-top: 10px;
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #333;
+                color: #fff;
+                font-size: 15;
+                font-weight: 300;
+                text-decoration: none;
+                border: none;
+                border-radius: 5px;
+                margin-right: 10px;
+            }
             
 
 
@@ -126,8 +126,8 @@
         <div id="searchFormContainer">
                     <form id="searchForm" method="POST" action='/Publication/search'>
                         <input type="text" name="search" placeholder="Search...">
-                        <input type="submit" name="searchType" value ="Search by Title"/>
-                        <input type="submit" name="searchType" value ="Search by Content"/>
+                        <input class = 'b' type="submit" name="searchType" value ="Search by Title"/>
+                        <input class = 'b' type="submit" name="searchType" value ="Search by Content"/>
                     </form>
                 </div>
 

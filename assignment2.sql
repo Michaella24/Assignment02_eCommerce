@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 21, 2024 at 12:34 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Mar 22, 2024 at 08:25 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,9 +41,9 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`profile_id`, `user_id`, `first_name`, `middle_name`, `last_name`) VALUES
-(1, 1, 'Damiano', 'Hshs', 'Miloncini'),
 (2, 4, 'Damiano', 'M', 's'),
-(3, 5, '', 'miranda', 'kiki');
+(3, 5, '', 'miranda', 'kiki'),
+(5, 6, 'Micka', 'f', 'fff');
 
 -- --------------------------------------------------------
 
@@ -65,10 +65,9 @@ CREATE TABLE `publication` (
 --
 
 INSERT INTO `publication` (`publication_id`, `profile_id`, `publication_title`, `publication_text`, `timestamp`, `publication_status`) VALUES
-(2, 1, 'Random Title', 'sssss', '2024-03-19 21:4', 1),
-(3, 1, 'Again', 'content@!!', '2024-03-19 22:3', 1),
-(4, 1, 'The Story Of Bullshit', 'Bonsoiree les p\'tite', '2024-03-20 02:03:36', 1),
-(5, 1, 'A New Story', 'Helooooo', '2024-03-20 18:24:12', 1);
+(6, 2, 'Happily Ever After', 'hello', '2024-03-22 19:01:57', 1),
+(8, 2, 'The Skunk', 'oop', '2024-03-22 19:02:19', 1),
+(9, 5, 'Thug Life', 'yur', '2024-03-22 19:02:48', 1);
 
 -- --------------------------------------------------------
 
@@ -89,14 +88,9 @@ CREATE TABLE `publication_comment` (
 --
 
 INSERT INTO `publication_comment` (`publication_comment_id`, `profile_id`, `publication_id`, `timestamp`, `text`) VALUES
-(1, 1, 2, '2024-03-20 01:0', 'Hello comments'),
-(2, 1, 2, '2024-03-20 01:0', 'commenting right now'),
-(20, 1, 2, '2024-03-20 01:46:36', 'trying one last time'),
-(21, 1, 2, '2024-03-20 01:46:42', 'Checking'),
-(50, 1, 2, '2024-03-20 18:23:02', 'hello'),
-(51, 1, 4, '2024-03-20 18:23:11', 'This story is so bad'),
-(52, 1, 5, '2024-03-20 18:49:49', 'dd'),
-(53, 1, 2, '2024-03-20 19:32:04', 'hh');
+(54, 2, 6, '2024-03-22 18:23:02', 'byebye'),
+(56, 5, 6, '2024-03-22 18:59:43', 'heee'),
+(57, 5, 8, '2024-03-22 19:03:04', 'Love it');
 
 -- --------------------------------------------------------
 
@@ -115,9 +109,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password_hash`) VALUES
-(1, 'damiano', 'ran'),
 (4, 'Kid', '$2y$10$EY0Grhd4Pe.xsKwPU4t8pOOw1fJENESp8Pqfc2ulF48oyn6qSXl7G'),
-(5, 'lol', '$2y$10$6o86APm1P1WCokqVt35Ok.zTRN8t07Os96tilFXdAi6ZJNUuwX31m');
+(5, 'lol', '$2y$10$6o86APm1P1WCokqVt35Ok.zTRN8t07Os96tilFXdAi6ZJNUuwX31m'),
+(6, 'MicThug', '$2y$10$cswUex7N/yW2G96WJKqLgudH9kuuKkTRFVEp5l98QJE5c20wa4UmS'),
+(7, 'jon', '$2y$10$kmYaK0zzQBLkayt3w8Z/ae6SvumcUtSEVEqy66F.RlLPcTF2WB2Te');
 
 --
 -- Indexes for dumped tables
@@ -160,25 +155,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `publication_comment`
 --
 ALTER TABLE `publication_comment`
-  MODIFY `publication_comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `publication_comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -188,20 +183,20 @@ ALTER TABLE `user`
 -- Constraints for table `profile`
 --
 ALTER TABLE `profile`
-  ADD CONSTRAINT `userIdForeignKey` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `userIdForeignKey` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `publication`
 --
 ALTER TABLE `publication`
-  ADD CONSTRAINT `profile_idForeignKey` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`);
+  ADD CONSTRAINT `profile_idForeignKey` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `publication_comment`
 --
 ALTER TABLE `publication_comment`
-  ADD CONSTRAINT `profile_id_foreign_key` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`),
-  ADD CONSTRAINT `publication_id_foreign_key` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`publication_id`);
+  ADD CONSTRAINT `profile_id_foreign_key` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `publication_id_foreign_key` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`publication_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,105 +1,80 @@
 <html>
 
 <head>
-    <title> User login </title>
-    <style>
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-      
-            align-items: center;
-       
-            justify-content: center;
-        
-        }
+<title> User login </title>
+<style>
 
-        .container {
-            width: auto;
-    
-            max-width: 80%;
-       
-            background-color: #333;
-    
-            color: #fff;
-      
-            padding: 10px;
-     
-            border-radius: 10px;
-          
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            
-            font-family: Arial, Helvetica, sans-serif;
-            text-align: center;
-            
-        }
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex; /* Use flexbox to center the container */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+.container {
+    width: auto; /* Set width to auto */
+    max-width: 80%; /* Set maximum width to 80% of the viewport */
+    background-color: #333; /* Black background */
+    color: #fff; /* White text color */
+    padding: 10px; /* Adjust padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center; /* Center the content horizontally */
+}
 
 
-        .form-group {
-            margin-bottom: 20px;
-            
-        }
+.form-group {
+    margin-bottom: 20px; /* Add space between form groups */
+}
 
-        .form-control {
-            width: 100%;
-            
-            padding: 10px;
-            
-            border: none;
-            
-            border-radius: 5px;
-            
-        }
+.form-control {
+    width: 100%; /* Make form controls fill the container width */
+    padding: 10px; /* Add padding to form controls */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners for form controls */
+}
 
-        input[type="submit"] {
-            background-color: #007bff;
-            
-            color: white;
-            
-            border: none;
-            
-            padding: 10px 20px;
-            
-            border-radius: 5px;
-            
-            cursor: pointer;
-            
-            margin-bottom: 15px;
-        }
+input[type="submit"] {
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove button border */
+    padding: 10px 20px; /* Add padding to button */
+    border-radius: 5px; /* Rounded corners for button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    margin-bottom: 15px;
+}
 
-        a {
-            color: #007bff;
-            
-            text-decoration: none;
-            
-        }
+a {
+    color: #007bff; /* Link text color */
+    text-decoration: none; /* Remove underline from links */
+}
 
-        a:hover {
-            text-decoration: underline;
-            
-        }
-    </style>
+a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+</style>
 
 </head>
 
 <body>
 
-    <div class="centered-content">
-        <?php include 'app/views/Publication/topBar.php'; ?>
-        <div class='container'>
-            <form method='post' action=''>
-                <div class="form-group">
-                    <label>New:<input type="text" class="form-control" name="text" placeholder="Text" /></label>
-                </div>
-                <div class="form-group">
-                    <input type="submit" name="action" value="Update" />
-                    <br>
-                    <a href='/User/register'>Cancel</a>
-                </div>
-            </form>
-        </div>
+<div class="centered-content">
+<?php include 'app/views/Publication/topBar.php'; ?>
+    <div class='container'>
+        <form method='post' action=''> 
+            <div class="form-group">
+                <label>New:<input type="text" class="form-control" value='<?= $data->text  ?>' name="text"/></label>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="action" value="Update" />
+                <br>
+                <a href='/User/register'>Cancel</a>
+            </div>
+        </form>
     </div>
+</div>
 
 
 

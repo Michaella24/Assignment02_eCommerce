@@ -36,7 +36,7 @@
             }
 
 
-            .register, .logout {
+            #submit {
                 margin-top: 10px;
                 display: inline-block;
                 padding: 10px 20px;
@@ -67,10 +67,10 @@
                 margin-top: 10px;
                 display: inline-block;
                 padding: 10px 20px;
-                background-color: #fff;
+                background-color: #333;
                 font-size: 15;
                 font-weight: 300;
-                color: #333;
+                color: #fff;
                 text-decoration: none;
                 border: none;
                 border-radius: 5px;
@@ -110,6 +110,19 @@
                 font-weight: 200;
                 font-size: 35;
             }
+            .b{
+                margin-top: 10px;
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #333;
+                color: #fff;
+                font-size: 15;
+                font-weight: 300;
+                text-decoration: none;
+                border: none;
+                border-radius: 5px;
+                margin-right: 10px;
+            }
             
 
 
@@ -122,7 +135,13 @@
 
         <?php include 'app/views/Publication/topBar.php'; ?>
         <h4>Welcome</h4>
-
+        <div id="searchFormContainer">
+                    <form id="searchForm" method="POST" action='/Publication/search'>
+                        <input type="text" name="search" placeholder="Search...">
+                        <input class = 'b' type="submit" name="searchType" value ="Search by Title"/>
+                        <input class = 'b' type="submit" name="searchType" value ="Search by Content"/>
+                    </form>
+                </div>
             <div id = 'links' >
                 <h3>Searched Publications</h3>
                 

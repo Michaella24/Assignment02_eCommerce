@@ -168,7 +168,7 @@ class Publication extends \app\core\Model {
                 $profileid = new \app\models\Profile();
                 $profileid = $profileid->getUser($_SESSION['user_id']);
                 
-                
+                // Check if $profileid is not false before accessing its properties
                 if ($profileid) {
                     if ($profileid->profile_id === $profile) {
                         $commentHeader = "<h5 id='yourComment' style='font-size: 20px; font-weight: 400;'>$username | $timestamp<a id='editButton' href='/Publication/updateComment/$id'>Edit</a></h5>$text ";
@@ -176,11 +176,11 @@ class Publication extends \app\core\Model {
                         $commentHeader = "<h5 style='font-size: 20px; font-weight: 400;'>$username | $timestamp</h5>$text";
                     }
                 } else {
-                  
+                    // Handle the case where $profileid is false (user is not logged in)
                     $commentHeader = "<h5 style='font-size: 20px; font-weight: 400;'>$username | $timestamp</h5>$text";
                 }
             } else {
-                
+                // Handle the case where $_SESSION['user_id'] is not set (user is not logged in)
                 $commentHeader = "<h5 style='font-size: 20px; font-weight: 400;'>$username | $timestamp</h5>$text";
             }
         
@@ -195,31 +195,33 @@ class Publication extends \app\core\Model {
 
     public function search($userSearch, $userSearchType) {
         $searchArray = [];
+        //if user clicks search by title 
         if ($userSearchType === 'Search by Title') {
 
             $SQL = 'SELECT p.publication_id, p.publication_title, u.username 
             FROM publication p
             JOIN profile pr ON p.profile_id = pr.profile_id
             JOIN user u ON pr.user_id = u.user_id
-            WHERE publication_title =:publication_title';
+            WHERE publication_title like :publication_title';
             
         $STATEMENT = self::$_conn->prepare($SQL);
         
         $STATEMENT->execute([
-            'publication_title' => $userSearch
+            'publication_title' => "%$userSearch%"
         ]);
         }
+        //if user clicks search by content
         else if  ($userSearchType === 'Search by Content'){
             $SQL = 'SELECT p.publication_id, p.publication_title, u.username 
             FROM publication p
             JOIN profile pr ON p.profile_id = pr.profile_id
             JOIN user u ON pr.user_id = u.user_id
-            WHERE publication_text =:publication_text';
+            WHERE publication_text like :publication_text';
         
         $STATEMENT = self::$_conn->prepare($SQL);
         
         $STATEMENT->execute([
-            'publication_text' => $userSearch
+            'publication_text' => "%$userSearch%"
         ]);
         }
         
@@ -275,6 +277,23 @@ class Publication extends \app\core\Model {
             'publication_id' => $publicationId
         ]);
     }
+
+    function getComment($id){
+        $SQL = 'SELECT text, publication_id FROM publication_comment WHERE publication_comment_id = :PCI';
+
+        $STMT = self::$_conn->prepare($SQL);
+
+        $STMT->execute(
+            [
+                'PCI'=>$id,
+            ]
+        );
+
+        $STMT->setFetchMode(PDO::FETCH_CLASS,'app\models\Publication');
+        return $STMT->fetch();
+    }
+
+
     
     
 

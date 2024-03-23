@@ -17,3 +17,6 @@ $this->addRoute('Publication/status/{id1}', 'Publication,status');
 $this->addRoute('Publication/test/{id1}', 'Publication,test');
 $this->addRoute('Publication/logout', 'Publication,logout');
 $this->addRoute('Publication/search', 'Publication,search');
+$this->addRoute('home', 'Publication,loadAll');
+$this->addRoute('','Publication,loadAll');
+
