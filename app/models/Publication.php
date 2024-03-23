@@ -168,7 +168,7 @@ class Publication extends \app\core\Model {
                 $profileid = new \app\models\Profile();
                 $profileid = $profileid->getUser($_SESSION['user_id']);
                 
-                // Check if $profileid is not false before accessing its properties
+                
                 if ($profileid) {
                     if ($profileid->profile_id === $profile) {
                         $commentHeader = "<h5 id='yourComment' style='font-size: 20px; font-weight: 400;'>$username | $timestamp<a id='editButton' href='/Publication/updateComment/$id'>Edit</a></h5>$text ";
@@ -176,11 +176,11 @@ class Publication extends \app\core\Model {
                         $commentHeader = "<h5 style='font-size: 20px; font-weight: 400;'>$username | $timestamp</h5>$text";
                     }
                 } else {
-                    // Handle the case where $profileid is false (user is not logged in)
+                  
                     $commentHeader = "<h5 style='font-size: 20px; font-weight: 400;'>$username | $timestamp</h5>$text";
                 }
             } else {
-                // Handle the case where $_SESSION['user_id'] is not set (user is not logged in)
+                
                 $commentHeader = "<h5 style='font-size: 20px; font-weight: 400;'>$username | $timestamp</h5>$text";
             }
         
